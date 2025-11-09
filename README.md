@@ -6,7 +6,9 @@ Deck available on Ankiweb: https://ankiweb.net/shared/info/2013132445
 
 ## Project Overview
 
-This repository documents what is AFAIK the first published attempt at using Large Language Models to autonomously create a complete language-learning grammar deck. Through a **2-layer agent hierarchy** (lead Claude Code + sub-agents, both running Opus), Claude Opus 4.1 successfully generated ~1500 Thai grammar cards (A2+ level) by mining authentic sentences from a 124,000-sentence corpus extracted from Thai TV shows. The project demonstrates that while LLMs currently cannot maintain perfect i+1 (incremental difficulty) progression without sophisticated scaffolding, they can produce pedagogically useful grammar decks with approximate difficulty ordering—opening possibilities for automated creation of language learning materials for underserved languages.
+This repository documents what is *AFAIK* the **first published attempt** at using Large Language Models to **autonomously create** a complete language-learning grammar deck. Through a **2-layer agent hierarchy** (lead Claude Code + sub-agents, both running Opus), Claude Opus 4.1 successfully generated **~1500 Thai grammar cards** (A2+ level) by mining authentic sentences from a **124,000-sentence corpus** extracted from Thai TV shows. The project demonstrates that while LLMs currently **cannot maintain perfect i+1** (incremental difficulty) progression without sophisticated scaffolding, they **can produce pedagogically useful grammar decks** with approximate difficulty ordering.
+
+This opens possibilities for automated creation of near-human quality language learning notes for underserved languages.
 
 # TLDR
 
@@ -23,15 +25,15 @@ If more sophisticated scaffolding and a nested agent hierarchy (i.e. sub-agents 
 
 ## Methodology
 
-I first created a detailed Thai grammar (A2+) curriculum representing about 1500 notes to make. I passed this curriculum around between Claude Opus 4.1 and Gemini Pro 2.5, and I had them make refinements based on grammar books, so it eventually came to a pretty good and precise curriculum: `thai_deck_curriculum.md`
+I first created a **detailed Thai grammar (A2+) curriculum** representing about **1500 notes** to make. I passed this curriculum around between Claude Opus 4.1 and Gemini Pro 2.5, and I had them make refinements based on grammar books, so it eventually came to a pretty good and precise curriculum: `thai_deck_curriculum.md`
 
 This curriculum served as the reference for actually writing the deck.
-The setup was basically: Claude Code acted as a main / lead agent orchestrating the deck creation by using sub-agents to call the `tsv-finder-cli`, search through the sentence database results returned by the CLI, select the good ones that are relevant for the specific grammar point involved. That way, the task of going through the search or query results would be delegated to the sub-agent and the main lead agent, i.e. the Claude Code session would not have its context window flooded with the results.
+The setup was basically: **Claude Code acted as a main / lead agent** orchestrating the deck creation by using **sub-agents** to call the `tsv-finder-cli`, search through the sentence database results returned by the CLI, select the good ones that are relevant for the specific grammar point involved. That way, the task of going through the search or query results would be **delegated to the sub-agent** and the main lead agent, i.e. the Claude Code session would **not have its context window flooded** with the results.
 
-Once the prompts were refined enough, which took a while, the process of making the deck was really relatively easy: just let the lead agent run with `--dangerously-skip-permissions` at full speed without requesting any user confirmation.
-The main problem is that user supervision is still required to some extent because the prompt is quite elaborate and sometimes Claude Code will forget some important aspects of work to be done: especially when restarting with a new lead agent session.
+Once the prompts were refined enough, which took a while, the process of making the deck was really relatively easy: just let the lead agent run with **`--dangerously-skip-permissions`** at full speed **without requesting any user confirmation**.
+The main problem is that **user supervision is still required** to some extent because the prompt is quite elaborate and sometimes Claude Code will forget some important aspects of work to be done: especially when **restarting with a new lead agent session**.
 
-In total, it took maybe 5 sliding windows of 5 hours (that is the way Anthropic plans are rate limited). It consumed about 3.9M Opus tokens and I was surprised by how difficult it was to actually reach the five-hour limits. But this is probably due to the fact that since it's not a coding scenario, most of the tokens involved are *input tokens*.
+In total, it took maybe **5 sliding windows of 5 hours** (that is the way Anthropic plans are rate limited). It consumed about **3.9M Opus tokens** and I was surprised by how difficult it was to actually reach the five-hour limits. But this is probably due to the fact that since it's not a coding scenario, most of the tokens involved are ***input tokens***.
 And just in the same way that the API charges much less for input tokens, probably the Claude Code Max plan attributes much less usage consumption to input tokens. 
 
 # Token Usage Summary
