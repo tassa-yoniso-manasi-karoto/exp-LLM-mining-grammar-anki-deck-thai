@@ -6,7 +6,9 @@ Deck available on Ankiweb: https://ankiweb.net/shared/info/2013132445
 
 ## Project Overview
 
-This repository documents what is *AFAIK* the **first published attempt** at using Large Language Models to **autonomously create** a complete language-learning grammar deck. Through a **2-layer agent hierarchy** (lead Claude Code + sub-agents, both running Opus), Claude Opus 4.1 successfully generated **~1500 Thai grammar cards** (A2+ level) by mining authentic sentences from a **124,000-sentence corpus** extracted from Thai TV shows. The project demonstrates that while LLMs currently **cannot maintain perfect i+1** (incremental difficulty) progression without sophisticated scaffolding, they **can produce pedagogically useful grammar decks** with approximate difficulty ordering.
+This repository documents what is *AFAIK* the **first published attempt** at using Large Language Models to **autonomously create** a complete language-learning grammar deck. Through a **2-layer agent hierarchy** (lead Claude Code + sub-agents, both running Opus), Claude Opus 4.1 successfully generated **~1500 Thai grammar cards** (A2+ level) by mining authentic sentences from a **124,000-sentence corpus** extracted from Thai TV shows.
+
+The project demonstrated that while LLMs currently **cannot maintain perfect i+1** (incremental difficulty) progression without sophisticated scaffolding, they **can produce pedagogically useful grammar decks** with approximate difficulty ordering.
 
 This opens possibilities for automated creation of near-human quality language learning notes for underserved languages.
 
